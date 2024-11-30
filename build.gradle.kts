@@ -27,7 +27,7 @@ plugins {
 
 group = properties("pluginGroup").get()
 
-version = properties("pluginVersion").get()
+version = project.changelog.getAll().keys.toList().first { Regex("""\d+\.\d+\.\d+""").matches(it) }
 
 // Configure project's dependencies
 repositories { mavenCentral() }
