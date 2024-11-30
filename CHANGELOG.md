@@ -4,6 +4,12 @@
 
 ## Unreleased
 
+## [1.0.2] - 2024-11-29
+
+### Changed
+
+- Removed build version limitation.
+
 ## [1.0.1] - 2024-06-23
 
 ### Changed

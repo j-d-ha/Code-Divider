@@ -1,5 +1,16 @@
 import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
+import java.io.FileReader
+import java.util.Properties
+import kotlin.apply
+
+// load .env file if it exists
+File(".env").takeIf(File::exists)?.let {
+    Properties().apply {
+        load(FileReader(it))
+        println(".env file found")
+    }
+}
 
 fun properties(key: String) = providers.gradleProperty(key)
 
@@ -16,7 +27,7 @@ plugins {
 
 group = properties("pluginGroup").get()
 
-version = properties("pluginVersion").get()
+version = project.changelog.getAll().keys.toList().first { Regex("""\d+\.\d+\.\d+""").matches(it) }
 
 // Configure project's dependencies
 repositories { mavenCentral() }
@@ -62,6 +73,10 @@ tasks {
         sinceBuild = properties("pluginSinceBuild")
         untilBuild = properties("pluginUntilBuild")
 
+        val changelog = project.changelog // local variable for configuration cache compatibility
+
+        version = changelog.getAll().keys.toList().first { Regex("""\d+\.\d+\.\d+""").matches(it) }
+
         // Extract the <!-- Plugin description --> section from README.md and provide for the
         // plugin's manifest
         pluginDescription =
@@ -80,7 +95,6 @@ tasks {
                 }
             }
 
-        val changelog = project.changelog // local variable for configuration cache compatibility
         // Get the latest available change notes from the changelog file
         changeNotes =
             properties("pluginVersion").map { pluginVersion ->
