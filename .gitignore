@@ -3,3 +3,7 @@
 .qodana
 build
 /keys/
+
+/certs/
+
+**/.env
