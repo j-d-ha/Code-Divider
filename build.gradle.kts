@@ -71,7 +71,7 @@ tasks {
     patchPluginXml {
         version = properties("pluginVersion")
         sinceBuild = properties("pluginSinceBuild")
-        // untilBuild = properties("pluginUntilBuild")
+        untilBuild = properties("pluginUntilBuild")
 
         val changelog = project.changelog // local variable for configuration cache compatibility
 
