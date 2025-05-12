@@ -4,6 +4,8 @@
 
 ## Unreleased
 
+- Updated build process.
+
 ## [1.0.4] - 2024-11-29
 
 ### Changed
