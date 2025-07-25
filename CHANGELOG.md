@@ -4,9 +4,11 @@
 
 ## Unreleased
 
+### Changed
+
 - Updated build process.
 
-## Added
+### Added
 
 - Added support for files without comment symbols like `.txt` files.
 
