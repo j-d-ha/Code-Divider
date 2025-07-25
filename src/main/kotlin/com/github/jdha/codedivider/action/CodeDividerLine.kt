@@ -164,7 +164,7 @@ fun codeDivider(
     settings: CodeDividerSettingsState,
     textPosition: TextPosition,
     lineCar: String,
-    textCase: TextCase
+    textCase: TextCase,
 ) {
     // ── Setup Values Needed To Make Line ─────────────────────────────────────────────────────────
     val editor = e.getData(CommonDataKeys.EDITOR) ?: return
@@ -190,6 +190,7 @@ fun codeDivider(
             errorOnNoCommentSymbol = settings.errorOnNoCommentSymbol,
             commentPad = commentPad,
             commentSymbolType = settings.commentSymbolTypeLine,
+            usePaddingWhenNoCommentSymbol = settings.usePaddingWhenNoCommentSymbol,
         )
 
     // ── Existing Text ────────────────────────────────────────────────────────────────────────────
@@ -271,18 +272,23 @@ fun codeDivider(
 // ━━ HELPERS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 fun getCommentSymbols(
-    commenter: Commenter,
+    commenter: Commenter?,
     errorOnNoCommentSymbol: Boolean,
     commentPad: String,
-    commentSymbolType: CommentSymbolType
+    commentSymbolType: CommentSymbolType,
+    usePaddingWhenNoCommentSymbol: Boolean,
 ): Pair<String, String> {
+    // this is for .txt and other files that don't have a commenter.'
+    if (commenter == null)
+        return if (usePaddingWhenNoCommentSymbol) Pair(commentPad, commentPad) else Pair("", "")
+
     // some languages like xml don't have lineCommentPrefix; some like python don't have
-    // blockCommentPrefix. We use the elvis operator to handle this and check if any value is null
+    // blockCommen Prefix. We use the elvis operator to handle this and check if any value is null
     val lineCommentPrefix = commenter.lineCommentPrefix?.trim()
     val blockCommentPrefix = commenter.blockCommentPrefix?.trim()
     val blockCommentSuffix = commenter.blockCommentSuffix?.trim()
 
-    // some files like .txt files wont have comment symbols
+    // some files like .txt files wont have comment symbols.
     if (errorOnNoCommentSymbol && lineCommentPrefix == null && blockCommentPrefix == null)
         throw Exception("No comment prefix found")
 

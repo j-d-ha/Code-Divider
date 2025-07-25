@@ -4,7 +4,13 @@
 
 ## Unreleased
 
+### Changed
+
 - Updated build process.
+
+### Added
+
+- Added support for files without comment symbols like `.txt` files.
 
 ## [1.0.4] - 2024-11-29
 

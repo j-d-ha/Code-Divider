@@ -12,19 +12,19 @@ enum class TextCase {
     UPPER,
     LOWER,
     TITLE,
-    NONE
+    NONE,
 }
 
 enum class TextPosition {
     LEFT,
     CENTER,
-    Right
+    Right,
 }
 
 enum class CommentSymbolType {
     ONE_SINGLE_LINE,
     TWO_SINGLE_LINE,
-    TWO_MULTI_LINE
+    TWO_MULTI_LINE,
 }
 
 enum class BoxType {
@@ -48,6 +48,7 @@ class CodeDividerSettingsState : PersistentStateComponent<CodeDividerSettingsSta
 
     // GENERAL
     var errorOnNoCommentSymbol = true
+    var usePaddingWhenNoCommentSymbol = false
 
     // LINE - GENERAL
     var lineLengthLine = 88
