@@ -210,6 +210,7 @@ fun normalBox(e: AnActionEvent, boxType: BoxType) {
             errorOnNoCommentSymbol = settings.errorOnNoCommentSymbol,
             commentPad = SPACE,
             commentSymbolType = CommentSymbolType.ONE_SINGLE_LINE,
+            usePaddingWhenNoCommentSymbol = settings.usePaddingWhenNoCommentSymbol,
         )
 
     // ── Existing Text ────────────────────────────────────────────────────────────────────────────
@@ -352,8 +353,10 @@ fun normalBox(e: AnActionEvent, boxType: BoxType) {
     val box =
         buildString {
                 val textList =
-                    if (existingText.length >= settings.targetLengthBox ||
-                        existingText.contains("\n")) {
+                    if (
+                        existingText.length >= settings.targetLengthBox ||
+                            existingText.contains("\n")
+                    ) {
                         buildList {
                             fillLength =
                                 existingText.split(Regex(pattern = "\\s")).fold(fillLength) {
@@ -397,18 +400,12 @@ fun normalBox(e: AnActionEvent, boxType: BoxType) {
                         cornerTL +
                         horizontal.repeat(topStraightLength) +
                         cornerTR +
-                        postCommentIndent,
+                        postCommentIndent
                 )
 
                 textList.forEach {
                     appendLine(
-                        lineStart +
-                            vertical +
-                            linePad +
-                            it +
-                            linePad +
-                            vertical +
-                            postCommentIndent,
+                        lineStart + vertical + linePad + it + linePad + vertical + postCommentIndent
                     )
                 }
 
@@ -417,7 +414,7 @@ fun normalBox(e: AnActionEvent, boxType: BoxType) {
                         cornerBL +
                         horizontal.repeat(topStraightLength) +
                         cornerBR +
-                        postCommentIndent,
+                        postCommentIndent
                 )
             }
             .trimEnd()
