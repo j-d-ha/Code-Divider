@@ -17,6 +17,11 @@ class CodeDividerSettingsConfigurable : BoundConfigurable("Code Divider") {
                     row("Error on no comment symbol for language") {
                         checkBox("").bindSelected(settings::errorOnNoCommentSymbol)
                     }
+                    row(
+                        "Use whitespace padding for files with no comment symbol (Ex. .txt files)"
+                    ) {
+                        checkBox("").bindSelected(settings::usePaddingWhenNoCommentSymbol)
+                    }
                 }
                 .expanded = true
 
@@ -33,17 +38,20 @@ class CodeDividerSettingsConfigurable : BoundConfigurable("Code Divider") {
                             row {
                                 radioButton(
                                     "Single line comment symbol, start only",
-                                    CommentSymbolType.ONE_SINGLE_LINE)
+                                    CommentSymbolType.ONE_SINGLE_LINE,
+                                )
                             }
                             row {
                                 radioButton(
                                     "Single line comment symbol, start and end",
-                                    CommentSymbolType.TWO_SINGLE_LINE)
+                                    CommentSymbolType.TWO_SINGLE_LINE,
+                                )
                             }
                             row {
                                 radioButton(
                                     "Multi line comment symbol, start and end",
-                                    CommentSymbolType.TWO_MULTI_LINE)
+                                    CommentSymbolType.TWO_MULTI_LINE,
+                                )
                             }
                         }
                         .bind(settings::commentSymbolTypeLine)
@@ -62,7 +70,8 @@ class CodeDividerSettingsConfigurable : BoundConfigurable("Code Divider") {
                                                     e.consume()
                                                 }
                                             }
-                                        })
+                                        }
+                                    )
                                 }
                                 .bindItem(settings::lineCharStandard.toNullableProperty())
                                 .columns(5)
@@ -88,7 +97,8 @@ class CodeDividerSettingsConfigurable : BoundConfigurable("Code Divider") {
                                                     e.consume()
                                                 }
                                             }
-                                        })
+                                        }
+                                    )
                                 }
                                 .bindItem(settings::lineCharHeavy.toNullableProperty())
                                 .columns(5)
@@ -114,7 +124,8 @@ class CodeDividerSettingsConfigurable : BoundConfigurable("Code Divider") {
                                                     e.consume()
                                                 }
                                             }
-                                        })
+                                        }
+                                    )
                                 }
                                 .bindItem(settings::lineCharDouble.toNullableProperty())
                                 .columns(5)
