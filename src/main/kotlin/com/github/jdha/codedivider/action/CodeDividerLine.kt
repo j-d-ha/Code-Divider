@@ -1,5 +1,7 @@
 package com.github.jdha.codedivider.action
 
+import com.github.jdha.codedivider.commenter.CSharpCommenter
+import com.github.jdha.codedivider.commenter.FSharpCommenter
 import com.github.jdha.codedivider.settings.CodeDividerSettingsState
 import com.github.jdha.codedivider.settings.CommentSymbolType
 import com.github.jdha.codedivider.settings.TextCase
@@ -183,7 +185,16 @@ fun codeDivider(
     // ── Comment Symbols ──────────────────────────────────────────────────────────────────────────
     val commentPad = if (settings.whiteSpacePadCommentSymbolLine) SPACE else EMPTY
 
-    val commenter = LanguageCommenters.INSTANCE.forLanguage(language)
+    val commenter =
+        LanguageCommenters.INSTANCE.forLanguage(language)
+            ?: run {
+                when (language.id) {
+                    "C#" -> CSharpCommenter.INSTANCE
+                    "F#" -> FSharpCommenter.INSTANCE
+                    else -> null
+                }
+            }
+
     val (commentPrefix, commentSuffix) =
         getCommentSymbols(
             commenter = commenter,
