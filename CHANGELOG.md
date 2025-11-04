@@ -11,6 +11,7 @@
 ### Added
 
 - Added support for files without comment symbols like `.txt` files.
+- Added support for C# and F#.
 
 ## [1.0.4] - 2024-11-29
 
