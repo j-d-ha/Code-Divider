@@ -2,7 +2,9 @@
 
 # Code Divider Changelog
 
-## Unreleased
+## [Unreleased]
+
+## [1.0.5] - 2025-07-26
 
 ### Changed
 
@@ -30,3 +32,9 @@
 ### Added
 
 - Initial release.
+
+[Unreleased]: https://github.com/j-d-ha/Code-Divider/compare/v1.0.5...HEAD
+[1.0.5]: https://github.com/j-d-ha/Code-Divider/compare/v1.0.4...v1.0.5
+[1.0.4]: https://github.com/j-d-ha/Code-Divider/compare/v1.0.1...v1.0.4
+[1.0.1]: https://github.com/j-d-ha/Code-Divider/compare/v1.0.0...v1.0.1
+[1.0.0]: https://github.com/j-d-ha/Code-Divider/commits/v1.0.0
